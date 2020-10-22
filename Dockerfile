@@ -1,6 +1,9 @@
-FROM jrottenberg/ffmpeg:4.2-alpine
+FROM linuxserver/ffmpeg:arm32v7-latest
 
-RUN apk add inotify-tools bash
+RUN apt-get update && \
+apt-get install -y \
+ 	bash \
+	inotify-tools
 
 COPY watch.sh /watch.sh
 

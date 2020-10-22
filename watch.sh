@@ -1,7 +1,7 @@
 #!/bin/bash
 
 check_file (){
-    /usr/local/bin/ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $1;
+    ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $1;
 }
 
 archive_file (){
@@ -27,9 +27,9 @@ check_and_archive_file (){
 }
 
 check_existing_files (){
-    touch /data/dummy
+    touch /dummy
     sleep 1
-    find "${MONITORDIR}" -maxdepth 1 -type f -name "*.mp4" ! -newer /data/dummy | while read file; do check_and_archive_file "$file"; done
+    find "${MONITORDIR}" -maxdepth 1 -type f -name "*.mp4" ! -newer /dummy | while read file; do check_and_archive_file "$file"; done
 }
 
 # run ffprobe on all files in the directory that havent been modified in 1 second
